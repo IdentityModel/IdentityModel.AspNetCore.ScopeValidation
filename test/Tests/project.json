@@ -8,6 +8,7 @@
     "Microsoft.AspNet.Http": "1.0.0-rc1-final",
     "FluentAssertions": "4.0.1",
     "Microsoft.AspNet.TestHost": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Authentication": "1.0.0-rc1-final",
     "IdentityModel.AspNet.ScopeValidation": "",
     "IdentityModel":  "2.0.0-alpha2"
   },

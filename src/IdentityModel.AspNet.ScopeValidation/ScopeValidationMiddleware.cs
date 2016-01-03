@@ -33,6 +33,16 @@ namespace IdentityModel.AspNet.ScopeValidation
                 throw new ArgumentNullException(nameof(options));
             }
 
+            if (string.IsNullOrWhiteSpace(options.ScopeClaimType))
+            {
+                throw new ArgumentNullException(nameof(options.ScopeClaimType));
+            }
+
+            if (options.AllowedScopes == null)
+            {
+                throw new ArgumentNullException(nameof(options.AllowedScopes));
+            }
+
             _next = next;
             _options = options;
         }
