@@ -39,8 +39,17 @@ namespace IdentityModel.AspNet.ScopeValidation
 
         public async Task Invoke(HttpContext context)
         {
-            // if no token was sent - no need to validate scopes
-            var principal = context.User;
+            ClaimsPrincipal principal;
+
+            if (!string.IsNullOrWhiteSpace(_options.AuthenticationScheme))
+            {
+                principal = await context.Authentication.AuthenticateAsync(_options.AuthenticationScheme);
+            }
+            else
+            {
+                principal = context.User;
+            }
+
             if (principal == null || principal.Identity == null || !principal.Identity.IsAuthenticated)
             {
                 await _next(context);
