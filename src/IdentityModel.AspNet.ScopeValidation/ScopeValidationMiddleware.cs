@@ -33,14 +33,33 @@ namespace IdentityModel.AspNet.ScopeValidation
                 throw new ArgumentNullException(nameof(options));
             }
 
+            if (string.IsNullOrWhiteSpace(options.ScopeClaimType))
+            {
+                throw new ArgumentNullException(nameof(options.ScopeClaimType));
+            }
+
+            if (options.AllowedScopes == null)
+            {
+                throw new ArgumentNullException(nameof(options.AllowedScopes));
+            }
+
             _next = next;
             _options = options;
         }
 
         public async Task Invoke(HttpContext context)
         {
-            // if no token was sent - no need to validate scopes
-            var principal = context.User;
+            ClaimsPrincipal principal;
+
+            if (!string.IsNullOrWhiteSpace(_options.AuthenticationScheme))
+            {
+                principal = await context.Authentication.AuthenticateAsync(_options.AuthenticationScheme);
+            }
+            else
+            {
+                principal = context.User;
+            }
+
             if (principal == null || principal.Identity == null || !principal.Identity.IsAuthenticated)
             {
                 await _next(context);

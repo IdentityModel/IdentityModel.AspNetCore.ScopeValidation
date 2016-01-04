@@ -6,5 +6,6 @@ namespace IdentityModel.AspNet.ScopeValidation
     {
         public string ScopeClaimType { get; set; } = "scope";
         public IEnumerable<string> AllowedScopes { get; set; }
+        public string AuthenticationScheme { get; set; }
     }
 }
