@@ -74,8 +74,6 @@ namespace IdentityModel.AspNet.ScopeValidation
 
             context.Response.StatusCode = 403;
             context.Response.Headers.Add("WWW-Authenticate", new[] { "Bearer error=\"insufficient_scope\"" });
-
-            EmitCorsResponseHeaders(context);
         }
 
         private bool ScopesFound(ClaimsPrincipal principal)
@@ -96,27 +94,6 @@ namespace IdentityModel.AspNet.ScopeValidation
             }
 
             return false;
-        }
-
-        private void EmitCorsResponseHeaders(HttpContext context)
-        {
-            StringValues values;
-
-            if (context.Request.Headers.TryGetValue("Origin", out values))
-            {
-                context.Response.Headers.Add("Access-Control-Allow-Origin", values);
-                context.Response.Headers.Add("Access-Control-Expose-Headers", new string[] { "WWW-Authenticate" });
-            }
-
-            if (context.Request.Headers.TryGetValue("Access-Control-Request-Method", out values))
-            {
-                context.Response.Headers.Add("Access-Control-Allow-Method", values);
-            }
-
-            if (context.Request.Headers.TryGetValue("Access-Control-Request-Headers", out values))
-            {
-                context.Response.Headers.Add("Access-Control-Allow-Headers", values);
-            }
         }
     }
 }
