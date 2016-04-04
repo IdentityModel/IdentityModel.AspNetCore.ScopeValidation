@@ -1,5 +1,5 @@
-﻿using IdentityModel.AspNet.ScopeValidation;
-using Microsoft.AspNet.Builder;
+﻿using IdentityModel.AspNetCore.ScopeValidation;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
