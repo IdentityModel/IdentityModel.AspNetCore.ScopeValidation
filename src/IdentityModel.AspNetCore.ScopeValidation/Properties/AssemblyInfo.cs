@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("IdentityModel.AspNet.ScopeValidation")]
+[assembly: AssemblyTitle("IdentityModel.AspNetCore.ScopeValidation")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("IdentityModel.AspNet.ScopeValidation")]
+[assembly: AssemblyProduct("IdentityModel.AspNetCore.ScopeValidation")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace IdentityModel.AspNet.ScopeValidation
+namespace IdentityModel.AspNetCore.ScopeValidation
 {
     public class ScopeValidationOptions
     {

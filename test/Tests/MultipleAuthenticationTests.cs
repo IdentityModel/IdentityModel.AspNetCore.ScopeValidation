@@ -1,7 +1,8 @@
 ﻿using FluentAssertions;
 using IdentityModel;
-using IdentityModel.AspNet.ScopeValidation;
-using Microsoft.AspNet.TestHost;
+using IdentityModel.AspNetCore.ScopeValidation;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -208,7 +209,9 @@ namespace Tests
             };
 
             var startup = new MultipleAuthenticationStartup(principal1, principal2, automaticAuthenticate, options);
-            var server = TestServer.Create(null, startup.Configure, startup.ConfigureServices);
+            var server = new TestServer(new WebHostBuilder()
+                .ConfigureServices((services) => startup.ConfigureServices(services))
+                .Configure((app)=> startup.Configure(app)));
 
             return server.CreateClient();
         }

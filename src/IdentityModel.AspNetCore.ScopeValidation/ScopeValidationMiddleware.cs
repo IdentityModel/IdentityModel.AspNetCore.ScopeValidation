@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
 using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace IdentityModel.AspNet.ScopeValidation
+namespace IdentityModel.AspNetCore.ScopeValidation
 {
     /// <summary>
     /// Middleware to check for scope claims in principal
