@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNet.Authentication;
-using Microsoft.AspNet.Http.Authentication;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http.Authentication;
 
 namespace Tests
 {
