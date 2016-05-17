@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNet.Authentication;
-using Microsoft.AspNet.Builder;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.WebEncoders;
+using System.Text.Encodings.Web;
+using Microsoft.Extensions.Options;
 
 namespace Tests
 {
     public class TestAuthenticationMiddleware : AuthenticationMiddleware<TestAuthenticationOptions>
     {
-        public TestAuthenticationMiddleware(RequestDelegate next, TestAuthenticationOptions options, ILoggerFactory loggerFactory, IUrlEncoder encoder) 
+        public TestAuthenticationMiddleware(RequestDelegate next,IOptions<TestAuthenticationOptions> options, ILoggerFactory loggerFactory, UrlEncoder encoder) 
             : base(next, options, loggerFactory, encoder)
         { }
 

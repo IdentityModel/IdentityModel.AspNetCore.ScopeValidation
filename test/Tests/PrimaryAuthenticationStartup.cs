@@ -1,11 +1,12 @@
 ﻿using IdentityModel.AspNet.ScopeValidation;
-using Microsoft.AspNet.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Builder;
 
 namespace Tests
 {

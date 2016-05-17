@@ -1,26 +1,25 @@
 ﻿{
-  "version": "1.0.0-beta3",
+  "version": "1.0.0-beta4",
   "description": "ASP.NET 5 Middleware for validating scope claims",
   "authors": [ "Dominick Baier", "Brock Allen" ],
-  "tags": [ "OAuth2", "OAuth 2.0", "Scope", "Security", "Identity", "IdentityServer" ],
-  "projectUrl": "https://github.com/IdentityModel/IdentityModel.AspNet.ScopeValidation",
-  "licenseUrl": "https://github.com/IdentityModel/IdentityModel.AspNet.ScopeValidation/blob/master/LICENSE",
-  "iconUrl": "https://identityserver.github.io/Documentation/assets/images/icons/IDmodel_icon128.png",
+  "packOptions": {
+    "tags": [ "OAuth2", "OAuth 2.0", "Scope", "Security", "Identity", "IdentityServer" ],
+    "projectUrl": "https://github.com/IdentityModel/IdentityModel.AspNet.ScopeValidation",
+    "licenseUrl": "https://github.com/IdentityModel/IdentityModel.AspNet.ScopeValidation/blob/master/LICENSE",
+    "iconUrl": "https://identityserver.github.io/Documentation/assets/images/icons/IDmodel_icon128.png"
+  },
 
   "dependencies": {
-    "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final"
+    "Microsoft.AspNetCore.Http.Abstractions": "1.0.0-rc2-final"
   },
 
   "frameworks": {
-    "net451": { },
-    "dotnet5.4": {
-      "dependencies": {
-        "Microsoft.CSharp": "4.0.1-beta-23516",
-        "System.Collections": "4.0.11-beta-23516",
-        "System.Linq": "4.0.1-beta-23516",
-        "System.Runtime": "4.0.21-beta-23516",
-        "System.Threading": "4.0.11-beta-23516"
-      }
+    "netcoreapp1.0": {
+      "imports": [
+        "dotnet5.6",
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
     }
   }
 }

@@ -1,4 +1,5 @@
 ﻿using IdentityModel.AspNet.ScopeValidation;
+using Microsoft.AspNetCore.Builder;
 
 namespace Microsoft.AspNet.Builder
 {

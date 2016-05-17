@@ -51,32 +51,27 @@ task Setup {
 			throw "global.json doesn't contain sdk version."
 		}
 	}
-	else {
-		throw "global.json doesn't contain sdk information."
-	}
+	
 }
 
 task Build -depends Restore, Clean {
 	
 	$appProjects | foreach {
-		dnu build "$_" --configuration $configuration --out "$artifactsBuildRoot"
+		dotnet build "$_" --configuration $configuration
     }
     
     $testProjects | foreach {
-		dnu build "$_" --configuration $configuration --out "$artifactsBuildRoot"
+		dotnet build "$_" --configuration $configuration
     }
 }
 
 task RunTests -depends Restore, Clean {
 	$testProjects | foreach {
 		Write-Output "Running tests for '$_' / CLR"
-        dnvm use $script:runtimeVersion -r clr -a x86
-		dnx --project "$_" Microsoft.Dnx.ApplicationHost test
-        
+		dotnet test  "$_"  
         
         Write-Output "Running tests for '$_' / CoreCLR"
-        dnvm use $script:runtimeVersion -r coreclr -a x86
-		dnx --project "$_" Microsoft.Dnx.ApplicationHost test
+		dotnet test "$_"
 	}
 }
 
@@ -107,13 +102,14 @@ task PatchProject {
 
 task Pack -depends Restore, Clean {
 	$packableProjectDirectories | foreach {
-		dnu pack "$_" --configuration $configuration --out "$artifactsPackagesRoot" --quiet
+		dotnet pack "$_" --configuration $configuration -o "$artifactsPackagesRoot"
 	}
 }
 
 task Restore {
 	@($srcRoot, $testsRoot) | foreach {
-        dnu restore "$_"
+        Write-Output "Restoring for '$_'"
+        dotnet restore "$_"
     }
 }
 
