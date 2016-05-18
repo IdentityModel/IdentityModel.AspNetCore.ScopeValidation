@@ -1,6 +1,6 @@
-﻿using IdentityModel.AspNet.ScopeValidation;
+﻿using IdentityModel.AspNetCore.ScopeValidation;
 
-namespace Microsoft.AspNet.Builder
+namespace Microsoft.AspNetCore.Builder
 {
     public static class ScopeValidationApplicationBuilderExtensions
     {

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Authentication;
+﻿using Microsoft.AspNetCore.Builder;
 using System.Security.Claims;
 
 namespace Tests

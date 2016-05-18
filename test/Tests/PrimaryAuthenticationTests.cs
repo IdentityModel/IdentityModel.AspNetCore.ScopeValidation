@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using IdentityModel;
-using Microsoft.AspNet.TestHost;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -54,7 +55,9 @@ namespace Tests
         private HttpClient CreateClient(ClaimsPrincipal principal, IEnumerable<string> allowedScopes)
         {
             var startup = new PrimaryAuthenticationStartup(principal, allowedScopes);
-            var server = TestServer.Create(null, startup.Configure, startup.ConfigureServices);
+            var server = new TestServer(new WebHostBuilder()
+                .Configure(startup.Configure)
+                .ConfigureServices(startup.ConfigureServices));
 
             return server.CreateClient();
         }

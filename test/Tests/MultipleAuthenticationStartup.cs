@@ -1,9 +1,6 @@
-﻿using IdentityModel.AspNet.ScopeValidation;
-using Microsoft.AspNet.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -28,24 +25,24 @@ namespace Tests
         {
             if (_principal1 != null)
             {
-                app.UseMiddleware<TestAuthenticationMiddleware>(new TestAuthenticationOptions
+                app.UseMiddleware<TestAuthenticationMiddleware>(Options.Create(new TestAuthenticationOptions
                 {
                     AuthenticationScheme = "scheme1",
                     User = _principal1,
 
                     AutomaticAuthenticate = _automaticAuthenticate
-                });
+                }));
             }
 
             if (_principal2 != null)
             {
-                app.UseMiddleware<TestAuthenticationMiddleware>(new TestAuthenticationOptions
+                app.UseMiddleware<TestAuthenticationMiddleware>(Options.Create(new TestAuthenticationOptions
                 {
                     AuthenticationScheme = "scheme2",
                     User = _principal2,
 
                     AutomaticAuthenticate = _automaticAuthenticate
-                });
+                }));
             }
 
             app.AllowScopes(_scopeOptions);

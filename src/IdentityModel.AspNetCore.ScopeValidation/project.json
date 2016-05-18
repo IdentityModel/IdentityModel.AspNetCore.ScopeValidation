@@ -1,0 +1,24 @@
+﻿{
+  "version": "1.0.0-beta4",
+  "description": "ASP.NET 5 Middleware for validating scope claims",
+  "authors": [ "Dominick Baier", "Brock Allen" ],
+
+  "packOptions": {
+    "tags": [ "OAuth2", "OAuth 2.0", "Scope", "Security", "Identity", "IdentityServer" ],
+    "projectUrl": "https://github.com/IdentityModel/IdentityModel.AspNetCore.ScopeValidation",
+    "licenseUrl": "https://github.com/IdentityModel/IdentityModel.AspNetCore.ScopeValidation/blob/master/LICENSE",
+    "iconUrl": "https://identityserver.github.io/Documentation/assets/images/icons/IDmodel_icon128.png"
+  },
+
+
+  "dependencies": {
+    "Microsoft.AspNetCore.Http.Abstractions": "1.0.0-rc2-final",
+    "NETStandard.Library": "1.5.0-rc2-24027"
+  },
+
+  "frameworks": {
+    "netstandard1.5": {
+      "imports": "dnxcore50"
+    }
+  }
+}
