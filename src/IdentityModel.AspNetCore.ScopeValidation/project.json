@@ -1,6 +1,6 @@
 ﻿{
-  "version": "1.0.0-beta4",
-  "description": "ASP.NET 5 Middleware for validating scope claims",
+  "version": "1.0.0-beta1",
+  "description": "ASP.NET Core Middleware for validating scope claims",
   "authors": [ "Dominick Baier", "Brock Allen" ],
 
   "packOptions": {
