@@ -10,6 +10,10 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+# Cake Build Related
+tools/Cake/
+tools/packages.config.md5sum
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -21,6 +25,7 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+project.lock.json
 
 # Visual Studio 2015 cache/options directory
 .vs/

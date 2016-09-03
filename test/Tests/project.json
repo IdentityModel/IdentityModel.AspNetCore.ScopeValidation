@@ -5,12 +5,15 @@
     "xunit": "2.1.0",
     "System.Security.Claims": "4.0.1",
     "dotnet-test-xunit": "1.0.0-rc2-build10025",
-    "IdentityModel.AspNetCore.ScopeValidation": "*",
     "Microsoft.AspNetCore.Authentication": "1.0.0",
     "FluentAssertions": "4.6.1",
     "Microsoft.AspNetCore.TestHost": "1.0.0",
-    "IdentityModel": "2.0.0-beta4"
+    "IdentityModel": "2.0.0-rc3",
+    "IdentityModel.AspNetCore.ScopeValidation": {
+      "target": "project"
+    }
   },
+
   "frameworks": {
     "netcoreapp1.0": {
       "dependencies": {
@@ -24,5 +27,6 @@
         "portable-net45+win8"
       ]
     }
-  }
+  },
+  "net452": { }
 }
