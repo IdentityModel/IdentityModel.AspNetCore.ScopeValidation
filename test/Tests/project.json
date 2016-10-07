@@ -8,7 +8,7 @@
     "Microsoft.AspNetCore.Authentication": "1.0.0",
     "FluentAssertions": "4.6.1",
     "Microsoft.AspNetCore.TestHost": "1.0.0",
-    "IdentityModel": "2.0.0-rc3",
+    "IdentityModel": "2.0.0",
     "IdentityModel.AspNetCore.ScopeValidation": {
       "target": "project"
     }

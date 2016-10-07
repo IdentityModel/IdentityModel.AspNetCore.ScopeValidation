@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Logging;
 
 namespace IdentityModel.AspNetCore.ScopeValidation
 {
@@ -12,6 +13,7 @@ namespace IdentityModel.AspNetCore.ScopeValidation
     /// </summary>
     public class ScopeValidationMiddleware
     {
+        private readonly ILogger<ScopeValidationMiddleware> _logger;
         private readonly RequestDelegate _next;
         private readonly ScopeValidationOptions _options;
 
@@ -20,8 +22,10 @@ namespace IdentityModel.AspNetCore.ScopeValidation
         /// </summary>
         /// <param name="next">The next midleware.</param>
         /// <param name="scopes">The scopes.</param>
-        public ScopeValidationMiddleware(RequestDelegate next, ScopeValidationOptions options)
+        public ScopeValidationMiddleware(RequestDelegate next, ScopeValidationOptions options, ILogger<ScopeValidationMiddleware> logger)
         {
+            _logger = logger;
+
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));
@@ -61,16 +65,21 @@ namespace IdentityModel.AspNetCore.ScopeValidation
 
             if (principal == null || principal.Identity == null || !principal.Identity.IsAuthenticated)
             {
+                _logger.LogDebug("Skipping scope validation because user is anonymous");
+
                 await _next(context);
                 return;
             }
 
             if (ScopesFound(principal))
             {
+                _logger.LogDebug("Scope validation success.");
+
                 await _next(context);
                 return;
             }
 
+            _logger.LogWarning("Scope validation failed. Return 403");
             context.Response.StatusCode = 403;
             context.Response.Headers.Add("WWW-Authenticate", new[] { "Bearer error=\"insufficient_scope\"" });
         }
@@ -78,6 +87,7 @@ namespace IdentityModel.AspNetCore.ScopeValidation
         private bool ScopesFound(ClaimsPrincipal principal)
         {
             var scopeClaims = principal.FindAll(_options.ScopeClaimType);
+            _logger.LogInformation("Scopes found on current principal: {scopes}", scopeClaims);
 
             if (scopeClaims == null || !scopeClaims.Any())
             {
