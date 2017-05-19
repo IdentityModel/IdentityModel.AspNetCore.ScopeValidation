@@ -29,11 +29,6 @@ namespace IdentityModel.AspNetCore.ScopeValidation
         {
             _logger = logger;
 
-            if (next == null)
-            {
-                throw new ArgumentNullException(nameof(next));
-            }
-
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -49,7 +44,7 @@ namespace IdentityModel.AspNetCore.ScopeValidation
                 throw new ArgumentNullException(nameof(options.AllowedScopes));
             }
 
-            _next = next;
+            _next = next ?? throw new ArgumentNullException(nameof(next));
             _options = options;
         }
 
