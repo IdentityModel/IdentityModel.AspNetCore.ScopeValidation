@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authentication;
 
 namespace IdentityModel.AspNetCore.ScopeValidation
 {
@@ -54,7 +55,7 @@ namespace IdentityModel.AspNetCore.ScopeValidation
 
             if (!string.IsNullOrWhiteSpace(_options.AuthenticationScheme))
             {
-                principal = await context.Authentication.AuthenticateAsync(_options.AuthenticationScheme);
+                principal = (await context.AuthenticateAsync(_options.AuthenticationScheme)).Principal;
             }
             else
             {

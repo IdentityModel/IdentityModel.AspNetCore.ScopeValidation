@@ -29,6 +29,17 @@ namespace Tests
         }
 
         [Fact]
+        public async Task No_User_Should_Be_Allowed()
+        {
+            var allowedScopes = new[] { "scope1", "scope2" };
+
+            var client = CreateClient(null, allowedScopes);
+            var response = await client.GetAsync("/");
+
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+        }
+
+        [Fact]
         public async Task Authenticated_User_Missing_Scopes_Should_Be_Forbidden()
         {
             var principal = Principal.Create("custom",

@@ -11,43 +11,38 @@ namespace Tests
 {
     public class MultipleAuthenticationStartup
     {
-        private readonly bool _automaticAuthenticate;
         private readonly ClaimsPrincipal _principal1;
         private readonly ClaimsPrincipal _principal2;
         private readonly ScopeValidationOptions _scopeOptions;
-
-        public MultipleAuthenticationStartup(ClaimsPrincipal principal1, ClaimsPrincipal principal2, bool automaticAuthenticate, ScopeValidationOptions options)
+        
+        public MultipleAuthenticationStartup(ClaimsPrincipal principal1, ClaimsPrincipal principal2, ScopeValidationOptions options)
         {
             _principal1 = principal1;
             _principal2 = principal2;
             _scopeOptions = options;
-            _automaticAuthenticate = automaticAuthenticate;
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication();
+
             if (_principal1 != null)
             {
-                app.UseMiddleware<TestAuthenticationMiddleware>(Options.Create(new TestAuthenticationOptions
-                {
-                    AuthenticationScheme = "scheme1",
-                    User = _principal1,
-
-                    AutomaticAuthenticate = _automaticAuthenticate
-                }));
+                services.AddScheme<TestAuthenticationOptions, TestAuthenticationHandler>(
+                    "scheme1",
+                    options => options.User = _principal1);
             }
 
             if (_principal2 != null)
             {
-                app.UseMiddleware<TestAuthenticationMiddleware>(Options.Create(new TestAuthenticationOptions
-                {
-                    AuthenticationScheme = "scheme2",
-                    User = _principal2,
-
-                    AutomaticAuthenticate = _automaticAuthenticate
-                }));
+                services.AddScheme<TestAuthenticationOptions, TestAuthenticationHandler>(
+                    "scheme2",
+                    options => options.User = _principal2);
             }
+        }
 
+        public void Configure(IApplicationBuilder app)
+        {
             app.AllowScopes(_scopeOptions);
 
             app.Run(ctx =>
@@ -55,11 +50,6 @@ namespace Tests
                 ctx.Response.StatusCode = 200;
                 return Task.FromResult(0);
             });
-        }
-
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddAuthentication();
         }
     }
 }

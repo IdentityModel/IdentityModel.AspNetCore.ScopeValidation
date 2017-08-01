@@ -20,6 +20,21 @@ namespace Tests
             _allowedScopes = allowedScopes;
         }
 
+        public void ConfigureServices(IServiceCollection services)
+        {
+            if (_principal != null)
+            {
+                services.AddScheme<TestAuthenticationOptions, TestAuthenticationHandler>(
+                            "scheme1",
+                            options1 => options1.User = _principal);
+
+                services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = "scheme1";
+                });
+            }
+        }
+
         public void Configure(IApplicationBuilder app)
         {
             app.Use(async (ctx, next) =>
@@ -36,8 +51,5 @@ namespace Tests
                 return Task.FromResult(0);
             });
         }
-
-        public void ConfigureServices(IServiceCollection services)
-        { }
     }
 }
